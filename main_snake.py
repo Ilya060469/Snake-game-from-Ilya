@@ -18,6 +18,8 @@ sound_eating = pg.mixer.Sound('zvuk-otkusyivaniya-yabloka-13332.wav')
 sound_click = pg.mixer.Sound('clikc.wav')
 sound_knock = pg.mixer.Sound('doorknock1.wav')
 sound_ai = pg.mixer.Sound('bolno-1.7-3.4.mp3')
+sound_gnil = pg.mixer.Sound('apple_gnil.mp3')
+sound_apple_dead = pg.mixer.Sound('apple_dead.mp3')
 block_size = 20
 big_apple_color = (139, 0, 255)
 roter_apple_color = (0, 0, 0)  # цвет гнилого яблока
@@ -41,7 +43,7 @@ timer = pygame.time.Clock()
 shrift = pygame.font.SysFont('shrift', 36)
 
 pause = False
-apple_time_life = 1  # время добавления бонус яблока
+apple_time_life = 0.05  # время добавления бонус яблока
 wall = False  # Установить для этой переменной значение «True», если хотите, чтобы змея врезалась в стену
 apple_decay_time = 10
 apple_time_dead = 5  # Как долго будет ждать гниющее яблоко
@@ -122,7 +124,7 @@ def start_the_game():
             super_Apl.thread.start()
 
             apples.append(super_Apl)
-
+            sound_apple_dead.play()
             timer.tick(apple_time_life)
 
     total = 0  # счет сброшен
@@ -215,7 +217,7 @@ def start_the_game():
                     snake_block.append(bl_ok)
                     snake_block.append(bl_ok)
                 else:
-                    # звук тухлого яблока
+                    sound_gnil.play()
                     total -= 1
                     snake_block.pop(0)
 
